@@ -476,7 +476,7 @@ public abstract class Single<T> implements SingleSource<T> {
     }
 
     /**
-     * Provides an API (via a cold Completable) that bridges the reactive world with the callback-style world.
+     * Provides an API (via a cold Single) that bridges the reactive world with the callback-style world.
      * <p>
      * <img width="640" height="454" src="https://raw.github.com/wiki/ReactiveX/RxJava/images/rx-operators/Single.create.png" alt="">
      * <p>
@@ -584,7 +584,7 @@ public abstract class Single<T> implements SingleSource<T> {
     @NonNull
     @SchedulerSupport(SchedulerSupport.NONE)
     public static <T> Single<T> error(final Throwable exception) {
-        ObjectHelper.requireNonNull(exception, "error is null");
+        ObjectHelper.requireNonNull(exception, "exception is null");
         return error(Functions.justCallable(exception));
     }
 
@@ -755,7 +755,7 @@ public abstract class Single<T> implements SingleSource<T> {
      * the source has more than one element, an IndexOutOfBoundsException is signalled.
      * <p>
      * The {@link Publisher} must follow the
-     * <a href="https://github.com/reactive-streams/reactive-streams-jvm#reactive-streams">Reactive-Streams specification</a>.
+     * <a href="https://github.com/reactive-streams/reactive-streams-jvm#reactive-streams">Reactive Streams specification</a>.
      * Violating the specification may result in undefined behavior.
      * <p>
      * If possible, use {@link #create(SingleOnSubscribe)} to create a
@@ -834,7 +834,7 @@ public abstract class Single<T> implements SingleSource<T> {
     @SchedulerSupport(SchedulerSupport.NONE)
     @NonNull
     public static <T> Single<T> just(final T item) {
-        ObjectHelper.requireNonNull(item, "value is null");
+        ObjectHelper.requireNonNull(item, "item is null");
         return RxJavaPlugins.onAssembly(new SingleJust<T>(item));
     }
 
@@ -2413,7 +2413,7 @@ public abstract class Single<T> implements SingleSource<T> {
     @NonNull
     @SchedulerSupport(SchedulerSupport.NONE)
     public final Single<T> doAfterSuccess(Consumer<? super T> onAfterSuccess) {
-        ObjectHelper.requireNonNull(onAfterSuccess, "doAfterSuccess is null");
+        ObjectHelper.requireNonNull(onAfterSuccess, "onAfterSuccess is null");
         return RxJavaPlugins.onAssembly(new SingleDoAfterSuccess<T>(this, onAfterSuccess));
     }
 
@@ -2501,13 +2501,13 @@ public abstract class Single<T> implements SingleSource<T> {
      * <p>
      * <img width="640" height="305" src="https://raw.github.com/wiki/ReactiveX/RxJava/images/rx-operators/doOnTerminate.png" alt="">
      * <p>
-     * This differs from {@code doAfterTerminate} in that this happens <em>before</em> the {@code onComplete} or
+     * This differs from {@code doAfterTerminate} in that this happens <em>before</em> the {@code onSuccess} or
      * {@code onError} notification.
      * <dl>
      *  <dt><b>Scheduler:</b></dt>
      *  <dd>{@code doOnTerminate} does not operate by default on a particular {@link Scheduler}.</dd>
      * </dl>
-     * @param onTerminate the action to invoke when the consumer calls {@code onComplete} or {@code onError}
+     * @param onTerminate the action to invoke when the consumer calls {@code onSuccess} or {@code onError}
      * @return the new Single instance
      * @see <a href="http://reactivex.io/documentation/operators/do.html">ReactiveX operators documentation: Do</a>
      * @see #doOnTerminate(Action)
@@ -2980,7 +2980,7 @@ public abstract class Single<T> implements SingleSource<T> {
     @NonNull
     @SchedulerSupport(SchedulerSupport.NONE)
     public final <R> Single<R> lift(final SingleOperator<? extends R, ? super T> lift) {
-        ObjectHelper.requireNonNull(lift, "onLift is null");
+        ObjectHelper.requireNonNull(lift, "lift is null");
         return RxJavaPlugins.onAssembly(new SingleLift<T, R>(this, lift));
     }
 
@@ -3593,7 +3593,7 @@ public abstract class Single<T> implements SingleSource<T> {
     @SchedulerSupport(SchedulerSupport.NONE)
     @Override
     public final void subscribe(SingleObserver<? super T> observer) {
-        ObjectHelper.requireNonNull(observer, "subscriber is null");
+        ObjectHelper.requireNonNull(observer, "observer is null");
 
         observer = RxJavaPlugins.onSubscribe(this, observer);
 

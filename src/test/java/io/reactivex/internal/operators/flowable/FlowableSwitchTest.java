@@ -14,7 +14,6 @@
 package io.reactivex.internal.operators.flowable;
 
 import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
 import java.util.*;
@@ -1201,5 +1200,33 @@ public class FlowableSwitchTest {
         .assertNever(thread)
         .assertNoErrors()
         .assertComplete();
+    }
+
+    @Test
+    public void switchMapFusedIterable() {
+        Flowable.range(1, 2)
+        .switchMap(new Function<Integer, Publisher<Integer>>() {
+            @Override
+            public Publisher<Integer> apply(Integer v)
+                    throws Exception {
+                return Flowable.fromIterable(Arrays.asList(v * 10));
+            }
+        })
+        .test()
+        .assertResult(10, 20);
+    }
+
+    @Test
+    public void switchMapHiddenIterable() {
+        Flowable.range(1, 2)
+        .switchMap(new Function<Integer, Publisher<Integer>>() {
+            @Override
+            public Publisher<Integer> apply(Integer v)
+                    throws Exception {
+                return Flowable.fromIterable(Arrays.asList(v * 10)).hide();
+            }
+        })
+        .test()
+        .assertResult(10, 20);
     }
 }

@@ -39,6 +39,28 @@ import io.reactivex.subscribers.TestSubscriber;
 
 public class FlowablePublishTest {
 
+    // This will undo the workaround so that the plain ObservablePublish is still
+    // tested.
+    @Before
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    public void before() {
+        RxJavaPlugins.setOnConnectableFlowableAssembly(new Function<ConnectableFlowable, ConnectableFlowable>() {
+            @Override
+            public ConnectableFlowable apply(ConnectableFlowable co) throws Exception {
+                if (co instanceof FlowablePublishAlt) {
+                    FlowablePublishAlt fpa = (FlowablePublishAlt) co;
+                    return FlowablePublish.create(Flowable.fromPublisher(fpa.source()), fpa.publishBufferSize());
+                }
+                return co;
+            }
+        });
+    }
+
+    @After
+    public void after() {
+        RxJavaPlugins.setOnConnectableFlowableAssembly(null);
+    }
+
     @Test
     public void testPublish() throws InterruptedException {
         final AtomicInteger counter = new AtomicInteger();

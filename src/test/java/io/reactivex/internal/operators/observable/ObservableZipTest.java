@@ -14,7 +14,6 @@
 package io.reactivex.internal.operators.observable;
 
 import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
 import java.util.*;
@@ -1427,5 +1426,35 @@ public class ObservableZipTest {
         ps1.onNext(1);
         ps2.onNext(2);
         to.assertResult(3);
+    }
+
+    @Test
+    public void firstErrorPreventsSecondSubscription() {
+        final AtomicInteger counter = new AtomicInteger();
+
+        List<Observable<?>> observableList = new ArrayList<Observable<?>>();
+        observableList.add(Observable.create(new ObservableOnSubscribe<Object>() {
+            @Override
+            public void subscribe(ObservableEmitter<Object> e)
+                    throws Exception { throw new TestException(); }
+        }));
+        observableList.add(Observable.create(new ObservableOnSubscribe<Object>() {
+            @Override
+            public void subscribe(ObservableEmitter<Object> e)
+                    throws Exception { counter.getAndIncrement(); }
+        }));
+
+        Observable.zip(observableList,
+                new Function<Object[], Object>() {
+                    @Override
+                    public Object apply(Object[] a) throws Exception {
+                        return a;
+                    }
+                })
+        .test()
+        .assertFailure(TestException.class)
+        ;
+
+        assertEquals(0, counter.get());
     }
 }
