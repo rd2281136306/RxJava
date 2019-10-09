@@ -1,4 +1,4 @@
-﻿(A more complete and up-to-date list of resources can be found at the reactivex.io site: [[http://reactivex.io/tutorials.html]])
+A more complete and up-to-date list of resources can be found at the [reactivex.io site](http://reactivex.io/tutorials.html)
 
 # Introducing Reactive Programming
 * [Introduction to Rx](http://www.introtorx.com/): a free, on-line book by Lee Campbell **(1.x)**
@@ -10,11 +10,12 @@
 * [Your Mouse is a Database](http://queue.acm.org/detail.cfm?id=2169076) by Erik Meijer
 * [A Playful Introduction to Rx](https://www.youtube.com/watch?v=WKore-AkisY) a video lecture by Erik Meijer
 * Wikipedia: [Reactive Programming](http://en.wikipedia.org/wiki/Reactive_programming) and [Functional Reactive Programming](http://en.wikipedia.org/wiki/Functional_reactive_programming)
-* [What is Reactive Programming?](http://blog.hackhands.com/overview-of-reactive-programming/) a video presentation by Jafar Husain.
+* [What is Reactive Programming?](https://www.youtube.com/watch?v=-8Y1-lE6NSA) a video presentation by Jafar Husain.
 * [2 minute introduction to Rx](https://medium.com/@andrestaltz/2-minute-introduction-to-rx-24c8ca793877) by André Staltz
 * StackOverflow: [What is (functional) reactive programming?](http://stackoverflow.com/a/1030631/1946802)
 * [The Reactive Manifesto](http://www.reactivemanifesto.org/)
 * Grokking RxJava, [Part 1: The Basics](http://blog.danlew.net/2014/09/15/grokking-rxjava-part-1/), [Part 2: Operator, Operator](http://blog.danlew.net/2014/09/22/grokking-rxjava-part-2/), [Part 3: Reactive with Benefits](http://blog.danlew.net/2014/09/30/grokking-rxjava-part-3/), [Part 4: Reactive Android](http://blog.danlew.net/2014/10/08/grokking-rxjava-part-4/) - published in Sep/Oct 2014 by Daniel Lew **(1.x)**
+* [Reactive Programming on Android with RxJava](https://leanpub.com/reactiveandroid), a free e-book by Chris Arriola and Angus Huang.
 
 # How Netflix Is Using RxJava
 * LambdaJam Chicago 2013: [Functional Reactive Programming in the Netflix API](https://speakerdeck.com/benjchristensen/functional-reactive-programming-in-the-netflix-api-lambdajam-2013) by Ben Christensen **(1.x)**
